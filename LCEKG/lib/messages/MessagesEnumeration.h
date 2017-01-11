@@ -8,7 +8,7 @@ enum MessagesId
 
 enum MessagesByteMask
 	:byte {
-		ID_MASK = B00011111,
+		ID_MASK = 0B00011111,
 		TYPE_MASK = 0B11100000,
 		BYTE_MASK = 0XFF
 };
