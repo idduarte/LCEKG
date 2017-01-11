@@ -2,6 +2,6 @@ struct Message{
   byte type;
   byte messageID;
   byte signalID;
-  unsigned long data;
+  uint16_t data;
   unsigned long timeStamp;
 };
