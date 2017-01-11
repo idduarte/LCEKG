@@ -10,7 +10,7 @@ enum BitSelector
 		BIT_7 = 0x80,
 };
 
-enum BitRotate: byte{
+enum ShiftRegister: byte{
 	ONE_BIT = 1,
 			TWO_BITS = 2,
 			THREE_BITS = 3,

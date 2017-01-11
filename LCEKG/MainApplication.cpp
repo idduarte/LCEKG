@@ -31,20 +31,24 @@ void configureADQ();
 
 
   void serialEvent() {
-    while (Serial.available()) {
-      Serial.readBytes(messageRecived,MessageZise::SIZE);
-      message.type = (messageRecived[0] & MessagesMask::TYPE_MASK) >>BitRotate::FIVE_BITS;
-      message.messageID = messageRecived[0] & MessagesMask::ID_MASK;
-      message.signalID = messageRecived[1];
-      message.data = (((unsigned int)(messageRecived[2]) << BitRotate::ONE_BYTE) & 0xFF00) | messageRecived[3];
-      message.timeStamp = (((unsigned long)(messageRecived[4]) << BitRotate::THREE_BYTES) & 0xFF000000) |
-                          (((unsigned long)(messageRecived[5]) << BitRotate::TWO_BYTES) & 0xFF0000) |
-                          (((unsigned long)(messageRecived[6]) << BitRotate::ONE_BYTE) & 0xFF00) |
-                          messageRecived[7];
-      isCommandRecived = true;
-      clearBuffer();
-    }
-  }
+	while (Serial.available()) {
+		Serial.readBytes(messageRecived, MessageConstants::SIZE);
+		message.type = (messageRecived[MessageConstants::TYPE_FIELD] & MessagesByteMask::TYPE_MASK) >> ShiftRegister::FIVE_BITS;
+		message.messageID = messageRecived[MessageConstants::ID_FIELD] & MessagesByteMask::ID_MASK;
+		message.signalID = messageRecived[MessageConstants::SIGNAL_ID_FIELD];
+		message.data = (((unsigned long) (messageRecived[MessageConstants::DATA_FIELD_1])<< ShiftRegister::THREE_BYTES) & 	MessagesLongMask::BYTE_3)
+				| (((unsigned long) (messageRecived[MessageConstants::DATA_FIELD_2]) << ShiftRegister::TWO_BYTES) & MessagesLongMask::BYTE_2)
+				| (((unsigned long) (messageRecived[MessageConstants::DATA_FIELD_3]) << ShiftRegister::ONE_BYTE) & MessagesLongMask::BYTE_1)
+				| messageRecived[MessageConstants::DATA_FIELD_4];
+		;
+		message.timeStamp = (((unsigned long) (messageRecived[MessageConstants::TIMESTAMP_FIELD_1])<< ShiftRegister::THREE_BYTES) & MessagesLongMask::BYTE_3)
+				| (((unsigned long) (messageRecived[MessageConstants::TIMESTAMP_FIELD_2])	<< ShiftRegister::TWO_BYTES) & MessagesLongMask::BYTE_2)
+				| (((unsigned long) (messageRecived[MessageConstants::TIMESTAMP_FIELD_3])	<< ShiftRegister::ONE_BYTE) & MessagesLongMask::BYTE_1)
+				| messageRecived[MessageConstants::TIMESTAMP_FIELD_4];
+		isCommandRecived = true;
+		clearBuffer();
+	}
+}
 
   void processMessage(){
     switch(message.type){
@@ -80,7 +84,7 @@ void configureADQ();
   }
 
   void clearBuffer(){
-    for(byte i = 0; i < 8; i++){
+    for(byte i = 0; i < MessageConstants::SIZE; i++){
       messageRecived[i]=0;
     }
     Serial.flush();
