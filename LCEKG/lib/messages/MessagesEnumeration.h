@@ -15,10 +15,10 @@ enum MessagesByteMask
 
 enum MessagesLongMask
 	:unsigned long {
-		BYTE_0 = 0xFF,
-		BYTE_1 = 0xFF00,
-		BYTE_2 = 0xFF0000,
-		BYTE_3 = 0XFF000000
+		MASK_BYTE_0 = 0xFF,
+		MASK_BYTE_1 = 0xFF00,
+		MASK_BYTE_2 = 0xFF0000,
+		MASK_BYTE_3 = 0XFF000000
 };
 
 enum MessagesType

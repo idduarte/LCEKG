@@ -4,6 +4,8 @@
 #include "lib/messages/MessageStructure.h"
 #include "lib/signals/SignalsEnumeration.h"
 #include "lib/util/BitsUtils.h"
+#include "lib/util/ByteUtils.h"
+
 
 //Prototipes
 void processMessage();
@@ -31,29 +33,29 @@ void loop() {
 void serialEvent() {
 	while (Serial.available()) {
 		Serial.readBytes(messageRecived, MessageConstants::SIZE);
-		message.type = (messageRecived[MessageConstants::TYPE_FIELD]
+		message.type = (messageRecived[ByteSelector::BYTE_0]
 				& MessagesByteMask::TYPE_MASK) >> ShiftRegister::FIVE_BITS;
-		message.messageID = messageRecived[MessageConstants::ID_FIELD]
+		message.messageID = messageRecived[ByteSelector::BYTE_0]
 				& MessagesByteMask::ID_MASK;
 		message.signalID =
-				(((uint16_t) (messageRecived[MessageConstants::SIGNAL_ID_FIELD_1])
-						<< ShiftRegister::ONE_BYTE) & MessagesLongMask::BYTE_1)
-						| (((byte) (messageRecived[MessageConstants::SIGNAL_ID_FIELD_2])));
+				(((uint16_t) (messageRecived[ByteSelector::BYTE_1])
+						<< ShiftRegister::ONE_BYTE) & MessagesLongMask::MASK_BYTE_1)
+						| (((byte) (messageRecived[ByteSelector::BYTE_2])));
 		message.data =
-				(((uint16_t) (messageRecived[MessageConstants::DATA_FIELD_1])
-						<< ShiftRegister::ONE_BYTE) & MessagesLongMask::BYTE_1)
-						| (((byte) (messageRecived[MessageConstants::DATA_FIELD_2])));
+				(((uint16_t) (messageRecived[ByteSelector::BYTE_3])
+						<< ShiftRegister::ONE_BYTE) & MessagesLongMask::MASK_BYTE_1)
+						| (((byte) (messageRecived[ByteSelector::BYTE_4])));
 		message.timeStamp =
-				(((unsigned long) (messageRecived[MessageConstants::TIMESTAMP_FIELD_1])
+				(((unsigned long) (messageRecived[ByteSelector::BYTE_5])
 						<< ShiftRegister::THREE_BYTES)
-						& MessagesLongMask::BYTE_3)
-						| (((unsigned long) (messageRecived[MessageConstants::TIMESTAMP_FIELD_2])
+						& MessagesLongMask::MASK_BYTE_3)
+						| (((unsigned long) (messageRecived[ByteSelector::BYTE_6])
 								<< ShiftRegister::TWO_BYTES)
-								& MessagesLongMask::BYTE_2)
-						| (((unsigned long) (messageRecived[MessageConstants::TIMESTAMP_FIELD_3])
+								& MessagesLongMask::MASK_BYTE_2)
+						| (((unsigned long) (messageRecived[ByteSelector::BYTE_7])
 								<< ShiftRegister::ONE_BYTE)
-								& MessagesLongMask::BYTE_1)
-						| messageRecived[MessageConstants::TIMESTAMP_FIELD_4];
+								& MessagesLongMask::MASK_BYTE_1)
+						| messageRecived[ByteSelector::BYTE_8];
 		isCommandRecived = true;
 		clearBuffer();
 	}
