@@ -32,7 +32,7 @@ void configureADQ();
 
   void serialEvent() {
     while (Serial.available()) {
-      Serial.readBytes(messageRecived,8);
+      Serial.readBytes(messageRecived,MessageZise::ZISE);
       message.type = (messageRecived[0] & MessagesMask::TYPE_MASK) >>BitRotate::FIVE_BITS;
       message.messageID = messageRecived[0] & MessagesMask::ID_MASK;
       message.signalID = messageRecived[1];

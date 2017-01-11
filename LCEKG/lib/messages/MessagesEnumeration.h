@@ -18,3 +18,7 @@ enum MessagesType: byte {
 	DELTA_STATUS = 0x01,
 	DATA_REQUEST = 0x02
 };
+
+enum MessageZise :byte{
+	ZISE = 10
+};
