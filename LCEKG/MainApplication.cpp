@@ -1,13 +1,10 @@
 #include <Arduino.h>
-//PRUEBA DE GIT
 #include "lib/messages/MessagesEnumeration.h"
 #include "lib/messages/MessageStructure.h"
 #include "lib/signals/SignalsEnumeration.h"
 #include "lib/util/BitsUtils.h"
-#include "lib/util/ByteUtils.h"
 
 
-//Prototipes
 void processMessage();
 void clearBuffer();
 void configureADQ();
@@ -33,29 +30,29 @@ void loop() {
 void serialEvent() {
 	while (Serial.available()) {
 		Serial.readBytes(messageRecived, MessageConstants::SIZE);
-		message.type = (messageRecived[ByteSelector::BYTE_0]
+		message.type = (messageRecived[MessageConstants::TYPE_FIELD]
 				& MessagesByteMask::TYPE_MASK) >> ShiftRegister::FIVE_BITS;
-		message.messageID = messageRecived[ByteSelector::BYTE_0]
+		message.messageID = messageRecived[MessageConstants::ID_FIELD]
 				& MessagesByteMask::ID_MASK;
 		message.signalID =
-				(((uint16_t) (messageRecived[ByteSelector::BYTE_1])
+				(((uint16_t) (messageRecived[MessageConstants::SIGNAL_ID_FIELD_1])
 						<< ShiftRegister::ONE_BYTE) & MessagesLongMask::MASK_BYTE_1)
-						| (((byte) (messageRecived[ByteSelector::BYTE_2])));
+						| (((byte) (messageRecived[MessageConstants::SIGNAL_ID_FIELD_2])));
 		message.data =
-				(((uint16_t) (messageRecived[ByteSelector::BYTE_3])
+				(((uint16_t) (messageRecived[MessageConstants::DATA_FIELD_1])
 						<< ShiftRegister::ONE_BYTE) & MessagesLongMask::MASK_BYTE_1)
-						| (((byte) (messageRecived[ByteSelector::BYTE_4])));
+						| (((byte) (messageRecived[MessageConstants::DATA_FIELD_2])));
 		message.timeStamp =
-				(((unsigned long) (messageRecived[ByteSelector::BYTE_5])
+				(((unsigned long) (messageRecived[MessageConstants::TIMESTAMP_FIELD_1])
 						<< ShiftRegister::THREE_BYTES)
 						& MessagesLongMask::MASK_BYTE_3)
-						| (((unsigned long) (messageRecived[ByteSelector::BYTE_6])
+						| (((unsigned long) (messageRecived[MessageConstants::TIMESTAMP_FIELD_2])
 								<< ShiftRegister::TWO_BYTES)
 								& MessagesLongMask::MASK_BYTE_2)
-						| (((unsigned long) (messageRecived[ByteSelector::BYTE_7])
+						| (((unsigned long) (messageRecived[MessageConstants::TIMESTAMP_FIELD_3])
 								<< ShiftRegister::ONE_BYTE)
 								& MessagesLongMask::MASK_BYTE_1)
-						| messageRecived[ByteSelector::BYTE_8];
+						| messageRecived[MessageConstants::TIMESTAMP_FIELD_4];
 		isCommandRecived = true;
 		clearBuffer();
 	}

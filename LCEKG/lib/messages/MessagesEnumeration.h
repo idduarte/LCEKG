@@ -1,3 +1,4 @@
+#include "../util/ByteUtils.h"
 enum MessagesId
 	: byte {
 		ID_START_ADQ = 0x00,
@@ -31,14 +32,14 @@ enum MessagesType
 enum MessageConstants
 	:byte {
 		SIZE = 9,
-		TYPE_FIELD = 0,
-		ID_FIELD = 0,
-		SIGNAL_ID_FIELD_1 = 1,
-		SIGNAL_ID_FIELD_2 = 2,
-		DATA_FIELD_1 = 3,
-		DATA_FIELD_2 = 4,
-		TIMESTAMP_FIELD_1 = 5,
-		TIMESTAMP_FIELD_2 = 6,
-		TIMESTAMP_FIELD_3 = 7,
-		TIMESTAMP_FIELD_4 = 8,
+		TYPE_FIELD = ByteSelector::BYTE_0,
+		ID_FIELD = ByteSelector::BYTE_0,
+		SIGNAL_ID_FIELD_1 = ByteSelector::BYTE_1,
+		SIGNAL_ID_FIELD_2 = ByteSelector::BYTE_2,
+		DATA_FIELD_1 = ByteSelector::BYTE_3,
+		DATA_FIELD_2 = ByteSelector::BYTE_4,
+		TIMESTAMP_FIELD_1 = ByteSelector::BYTE_5,
+		TIMESTAMP_FIELD_2 = ByteSelector::BYTE_6,
+		TIMESTAMP_FIELD_3 = ByteSelector::BYTE_7,
+		TIMESTAMP_FIELD_4 = ByteSelector::BYTE_8,
 };
