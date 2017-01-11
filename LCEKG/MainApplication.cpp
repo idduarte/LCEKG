@@ -35,10 +35,10 @@ void configureADQ();
       message.type = (messageRecived[0] & MessagesMask::TYPE_MASK) >>5;
       message.messageID = messageRecived[0] & MessagesMask::ID_MASK;
       message.signalID = messageRecived[1];
-      message.data = (((unsigned int)(messageRecived[2]) << 8) & 0xFF00) + messageRecived[3];
-      message.timeStamp = (((unsigned long)(messageRecived[4]) << 24) & 0xFF000000)+
-                          (((unsigned long)(messageRecived[5]) << 16) & 0xFF0000)+
-                          (((unsigned long)(messageRecived[6]) << 8) & 0xFF00)+
+      message.data = (((unsigned int)(messageRecived[2]) << 8) & 0xFF00) | messageRecived[3];
+      message.timeStamp = (((unsigned long)(messageRecived[4]) << 24) & 0xFF000000) |
+                          (((unsigned long)(messageRecived[5]) << 16) & 0xFF0000) |
+                          (((unsigned long)(messageRecived[6]) << 8) & 0xFF00) |
                           messageRecived[7];
       isCommandRecived = true;
       clearBuffer();
