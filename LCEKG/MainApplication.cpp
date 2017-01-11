@@ -1,7 +1,6 @@
 #include <Arduino.h>
 
 #include "lib/messages/MessagesEnumeration.h"
-#include "lib/messages/MessagesTypeEnumeration.h"
 #include "lib/signals/SignalIdEnumeration.h"
 #include "lib/messages/MessageStructure.h"
 
@@ -48,7 +47,7 @@ void configureADQ();
 
   void processMessage(){
     switch(message.type){
-      case COMMAND:
+      case MessagesType::COMMAND:
       //TODO
         switch(message.messageID){
           case MessagesId::ID_START_ADQ:
@@ -67,10 +66,10 @@ void configureADQ();
           break;
         }
       break;
-      case DELTA_STATUS:
+      case MessagesType::DELTA_STATUS:
       //TODO
       break;
-      case DATA_REQUEST:
+      case MessagesType::DATA_REQUEST:
       //TODO
       break;
       default:

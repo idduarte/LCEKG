@@ -12,6 +12,14 @@ enum MessagesMask
 		TYPE_MASK = 0B11100000,
 };
 
+enum MessagesType: byte {
+	COMMAND = 0x00,
+	DELTA_STATUS = 0x01,
+	DATA_REQUEST = 0x02
+};
+
+
+
 /*
  const byte MSG_ID_START_ADQ = 0x00;
  const byte MSG_ID_STOP_ADQ = 0x01;
