@@ -1,5 +1,5 @@
 /**
- *             ESTRUCTURA DEL MENSAJE
+ *                   ESTRUCTURA DEL MENSAJE
  *
  * |type2 |type1 |type0 |msid4 |msid3 |msid2 |msid1 |msid0 | BYTE 0
  * |sgid15|sgid14|sgid13|sgid12|sgid11|sgid10|sgid09|sgid08| BYTE 1
@@ -7,9 +7,9 @@
  * |                       DATA BYTE 1                     | BYTE 3
  * |                       DATA BYTE 2                     | BYTE 4
  * |                       TIME BYTE 1                     | BYTE 5
- * |                       TIME BYTE 1                     | BYTE 6
- * |                       TIME BYTE 1                     | BYTE 7
- * |                       TIME BYTE 1                     | BYTE 8
+ * |                       TIME BYTE 2                     | BYTE 6
+ * |                       TIME BYTE 3                     | BYTE 7
+ * |                       TIME BYTE 4                     | BYTE 8
  *
  */
 
