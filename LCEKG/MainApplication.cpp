@@ -1,8 +1,8 @@
 #include <Arduino.h>
 
 #include "lib/messages/MessagesEnumeration.h"
-#include "lib/signals/SignalIdEnumeration.h"
 #include "lib/messages/MessageStructure.h"
+#include "lib/signals/SignalsEnumeration.h"
 
 //Prototipes
 void processMessage();
