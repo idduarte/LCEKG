@@ -20,5 +20,5 @@ enum MessagesType: byte {
 };
 
 enum MessageZise :byte{
-	ZISE = 10
+	SIZE = 10
 };
