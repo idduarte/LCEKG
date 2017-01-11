@@ -33,18 +33,34 @@ void configureADQ();
   void serialEvent() {
 	while (Serial.available()) {
 		Serial.readBytes(messageRecived, MessageConstants::SIZE);
-		message.type = (messageRecived[MessageConstants::TYPE_FIELD] & MessagesByteMask::TYPE_MASK) >> ShiftRegister::FIVE_BITS;
-		message.messageID = messageRecived[MessageConstants::ID_FIELD] & MessagesByteMask::ID_MASK;
+		message.type = (messageRecived[MessageConstants::TYPE_FIELD]
+				& MessagesByteMask::TYPE_MASK) >> ShiftRegister::FIVE_BITS;
+		message.messageID = messageRecived[MessageConstants::ID_FIELD]
+				& MessagesByteMask::ID_MASK;
 		message.signalID = messageRecived[MessageConstants::SIGNAL_ID_FIELD];
-		message.data = (((unsigned long) (messageRecived[MessageConstants::DATA_FIELD_1])<< ShiftRegister::THREE_BYTES) & 	MessagesLongMask::BYTE_3)
-				| (((unsigned long) (messageRecived[MessageConstants::DATA_FIELD_2]) << ShiftRegister::TWO_BYTES) & MessagesLongMask::BYTE_2)
-				| (((unsigned long) (messageRecived[MessageConstants::DATA_FIELD_3]) << ShiftRegister::ONE_BYTE) & MessagesLongMask::BYTE_1)
-				| messageRecived[MessageConstants::DATA_FIELD_4];
+		message.data =
+				(((unsigned long) (messageRecived[MessageConstants::DATA_FIELD_1])
+						<< ShiftRegister::THREE_BYTES)
+						& MessagesLongMask::BYTE_3)
+						| (((unsigned long) (messageRecived[MessageConstants::DATA_FIELD_2])
+								<< ShiftRegister::TWO_BYTES)
+								& MessagesLongMask::BYTE_2)
+						| (((unsigned long) (messageRecived[MessageConstants::DATA_FIELD_3])
+								<< ShiftRegister::ONE_BYTE)
+								& MessagesLongMask::BYTE_1)
+						| messageRecived[MessageConstants::DATA_FIELD_4];
 		;
-		message.timeStamp = (((unsigned long) (messageRecived[MessageConstants::TIMESTAMP_FIELD_1])<< ShiftRegister::THREE_BYTES) & MessagesLongMask::BYTE_3)
-				| (((unsigned long) (messageRecived[MessageConstants::TIMESTAMP_FIELD_2])	<< ShiftRegister::TWO_BYTES) & MessagesLongMask::BYTE_2)
-				| (((unsigned long) (messageRecived[MessageConstants::TIMESTAMP_FIELD_3])	<< ShiftRegister::ONE_BYTE) & MessagesLongMask::BYTE_1)
-				| messageRecived[MessageConstants::TIMESTAMP_FIELD_4];
+		message.timeStamp =
+				(((unsigned long) (messageRecived[MessageConstants::TIMESTAMP_FIELD_1])
+						<< ShiftRegister::THREE_BYTES)
+						& MessagesLongMask::BYTE_3)
+						| (((unsigned long) (messageRecived[MessageConstants::TIMESTAMP_FIELD_2])
+								<< ShiftRegister::TWO_BYTES)
+								& MessagesLongMask::BYTE_2)
+						| (((unsigned long) (messageRecived[MessageConstants::TIMESTAMP_FIELD_3])
+								<< ShiftRegister::ONE_BYTE)
+								& MessagesLongMask::BYTE_1)
+						| messageRecived[MessageConstants::TIMESTAMP_FIELD_4];
 		isCommandRecived = true;
 		clearBuffer();
 	}
