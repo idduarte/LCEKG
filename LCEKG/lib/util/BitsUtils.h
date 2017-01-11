@@ -9,3 +9,16 @@ enum BitSelector
 		BIT_6 = 0x40,
 		BIT_7 = 0x80,
 };
+
+enum BitRotate: byte{
+	ONE_BIT = 1,
+			TWO_BITS = 2,
+			THREE_BITS = 3,
+			FOUR_BITS =4,
+			FIVE_BITS = 5,
+			SIX_BITS = 6,
+			SEVEN_BITS = 7,
+			ONE_BYTE = 8,
+			TWO_BYTES = 16,
+			THREE_BYTES = 24
+};

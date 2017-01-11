@@ -3,6 +3,7 @@
 #include "lib/messages/MessagesEnumeration.h"
 #include "lib/messages/MessageStructure.h"
 #include "lib/signals/SignalsEnumeration.h"
+#include "lib/util/BitsUtils.h"
 
 //Prototipes
 void processMessage();
@@ -32,13 +33,13 @@ void configureADQ();
   void serialEvent() {
     while (Serial.available()) {
       Serial.readBytes(messageRecived,8);
-      message.type = (messageRecived[0] & MessagesMask::TYPE_MASK) >>5;
+      message.type = (messageRecived[0] & MessagesMask::TYPE_MASK) >>BitRotate::FIVE_BITS;
       message.messageID = messageRecived[0] & MessagesMask::ID_MASK;
       message.signalID = messageRecived[1];
-      message.data = (((unsigned int)(messageRecived[2]) << 8) & 0xFF00) | messageRecived[3];
-      message.timeStamp = (((unsigned long)(messageRecived[4]) << 24) & 0xFF000000) |
-                          (((unsigned long)(messageRecived[5]) << 16) & 0xFF0000) |
-                          (((unsigned long)(messageRecived[6]) << 8) & 0xFF00) |
+      message.data = (((unsigned int)(messageRecived[2]) << BitRotate::ONE_BYTE) & 0xFF00) | messageRecived[3];
+      message.timeStamp = (((unsigned long)(messageRecived[4]) << BitRotate::THREE_BYTES) & 0xFF000000) |
+                          (((unsigned long)(messageRecived[5]) << BitRotate::TWO_BYTES) & 0xFF0000) |
+                          (((unsigned long)(messageRecived[6]) << BitRotate::ONE_BYTE) & 0xFF00) |
                           messageRecived[7];
       isCommandRecived = true;
       clearBuffer();
