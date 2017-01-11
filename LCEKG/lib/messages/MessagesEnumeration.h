@@ -10,6 +10,7 @@ enum MessagesMask
 	:byte {
 		ID_MASK = B00011111,
 		TYPE_MASK = 0B11100000,
+		BYTE_MASK = 0XFF
 };
 
 enum MessagesType: byte {
