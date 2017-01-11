@@ -26,6 +26,6 @@ enum SignalsMask
 		V2_MASK_BYTE_1 = 0x08,
 		V3_MASK_BYTE_2 = 0x01,
 		V4_MASK_BYTE_2 = 0x02,
-		V5_MASK_BYTE_ = 0x04,
-		V6_MASK_BYTE_ = 0x08
+		V5_MASK_BYTE_2 = 0x04,
+		V6_MASK_BYTE_2 = 0x08
 };
