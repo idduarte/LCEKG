@@ -1,6 +1,7 @@
 #include <Arduino.h>
+
+#include "lib/messages/MessagesEnumeration.h"
 #include "lib/messages/MessagesTypeEnumeration.h"
-#include "lib/messages/MessagesIdEnumeration.h"
 #include "lib/signals/SignalIdEnumeration.h"
 #include "lib/messages/MessageStructure.h"
 
@@ -32,8 +33,8 @@ void configureADQ();
   void serialEvent() {
     while (Serial.available()) {
       Serial.readBytes(messageRecived,8);
-      message.type = (messageRecived[0] & B11100000) >>5;
-      message.messageID = messageRecived[0] & B00011111;
+      message.type = (messageRecived[0] & MessagesMask::TYPE_MASK) >>5;
+      message.messageID = messageRecived[0] & MessagesMask::ID_MASK;
       message.signalID = messageRecived[1];
       message.data = (((unsigned int)(messageRecived[2]) << 8) & 0xFF00) + messageRecived[3];
       message.timeStamp = (((unsigned long)(messageRecived[4]) << 24) & 0xFF000000)+
@@ -50,16 +51,16 @@ void configureADQ();
       case COMMAND:
       //TODO
         switch(message.messageID){
-          case MSG_ID_START_ADQ:
+          case MessagesId::ID_START_ADQ:
           //TODO
           break;
-          case MSG_ID_STOP_ADQ:
+          case MessagesId::ID_STOP_ADQ:
           //TODO
           break;
-          case MSG_ID_SIGNALS_CFG:
+          case MessagesId::ID_SIGNALS_CFG:
           //TODO
           break;
-          case MSG_ID_PARAMETERS_CFG:
+          case MessagesId::ID_PARAMETERS_CFG:
           //TODO
           break;
           default:
