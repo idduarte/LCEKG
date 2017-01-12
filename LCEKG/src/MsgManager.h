@@ -4,7 +4,7 @@
  *  Created on: 12/01/2017
  *      Author: wancho
  */
-
+#include <Arduino.h>
 #ifndef MSGMANAGER_H_
 #define MSGMANAGER_H_
 

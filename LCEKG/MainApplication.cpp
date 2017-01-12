@@ -14,7 +14,7 @@ Message message;
 void setup() {
 	Serial.begin(115200);
 	byte *pointer=(byte *)&message;
-	MsgManager obj=new MsgManager(pointer);
+	MsgManager obj= MsgManager(pointer);
 
 }
 
