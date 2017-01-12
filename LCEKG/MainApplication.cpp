@@ -2,13 +2,13 @@
 #include "MainApplication.h"
 
 
-void processMessage();
 void clearBuffer();
 void configureADQ();
+void processMessage();
 
 boolean isCommandRecived = false;
 boolean isExecutting = false;
-byte messageRecived[8];
+byte messageRecived[MessageConstants::SIZE];
 Message message;
 
 void setup() {
