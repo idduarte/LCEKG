@@ -13,8 +13,9 @@ class FastAnalogRead {
 public:
 	FastAnalogRead();
 	virtual ~FastAnalogRead();
-	uint16_t getValue(uint8_t chanel);
+	uint16_t getValue(uint8_t ch);
 	void setPrescalerValue(byte ps);
+	uint16_t getOversampledValue(uint8_t ch, uint8_t b);
 };
 
 #endif /* SRC_FASTANALOGREAD_H_ */
