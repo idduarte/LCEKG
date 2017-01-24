@@ -1,5 +1,6 @@
 #include <Arduino.h>
 #include "MainApplication.h"
+#include <Thread.h>
 
 
 void clearBuffer();
@@ -15,6 +16,7 @@ void setup() {
 	Serial.begin(115200);
 	byte *pointer=(byte *)&message;
 	MsgManager obj= MsgManager(pointer);
+	Thread appControler = Thread();
 
 }
 

@@ -26,7 +26,8 @@ enum MessagesType
 	: byte {
 		COMMAND = 0x00,
 		DELTA_STATUS = 0x01,
-		DATA_REQUEST = 0x02
+		DATA_REQUEST = 0x02,
+		DATA_SENDING = 0x03
 };
 
 enum MessageConstants
