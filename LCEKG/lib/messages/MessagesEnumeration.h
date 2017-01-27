@@ -1,10 +1,11 @@
 #include "../util/ByteUtils.h"
 enum MessagesId
 	: byte {
-		ID_START_ADQ = 0x00,
-		ID_STOP_ADQ = 0x01,
-		ID_SIGNALS_CFG = 0x02,
-		ID_PARAMETERS_CFG = 0x03
+		ID_WHOIS = 0x00,
+		ID_START_ADQ = 0x01,
+		ID_STOP_ADQ = 0x02,
+		ID_SIGNALS_CFG = 0x03,
+		ID_PARAMETERS_CFG = 0x04
 };
 
 enum MessagesByteMask
